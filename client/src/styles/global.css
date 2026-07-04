@@ -430,6 +430,16 @@ body {
     min-width: 90px;
     padding: 8px 12px;
   }
+
+  .game-grid {
+    flex-direction: column;
+  }
+
+  .radar-map-container {
+    min-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 }
 
 @media (max-width: 576px) {

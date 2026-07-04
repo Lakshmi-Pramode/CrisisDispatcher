@@ -145,7 +145,7 @@ export default function AppLayout() {
         </Header>
         <Content style={{
           margin: 24,
-          height: 'calc(100vh - 112px)',
+          minHeight: 'calc(100vh - 112px)',
           display: 'flex',
           flexDirection: 'column',
         }}>
