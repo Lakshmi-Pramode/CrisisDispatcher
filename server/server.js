@@ -20,8 +20,8 @@ connectDB();
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_URL
-    : ['http://localhost:5173', 'http://localhost:3000'],
+    ? [process.env.CLIENT_URL, 'https://crisis-dispatcher.vercel.app']
+    : ['http://localhost:5173', 'http://localhost:3000', 'https://crisis-dispatcher.vercel.app'],
   credentials: true,
 }));
 

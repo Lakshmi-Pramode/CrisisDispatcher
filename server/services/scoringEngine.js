@@ -33,8 +33,8 @@ function calculateModuleScore(moduleEvents) {
   const accuracy = decisions.length > 0 ? (correct / decisions.length) * 100 : 0;
 
   const reactionTimes = moduleEvents
-    .filter(e => e.reactionTime && e.reactionTime > 0)
-    .map(e => e.reactionTime);
+    .filter(e => (e.reactionTime && e.reactionTime > 0) || (e.decisionTime && e.decisionTime > 0))
+    .map(e => e.reactionTime || e.decisionTime);
   const avgRT = reactionTimes.length > 0
     ? reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length
     : THRESHOLDS.maximumReactionTime;
@@ -97,8 +97,8 @@ function calcStressTolerance(events) {
 
   // Reaction time under stress
   const stressRT = module2Events
-    .filter(e => e.reactionTime && e.reactionTime > 0)
-    .map(e => e.reactionTime);
+    .filter(e => (e.reactionTime && e.reactionTime > 0) || (e.decisionTime && e.decisionTime > 0))
+    .map(e => e.reactionTime || e.decisionTime);
   const avgStressRT = stressRT.length > 0
     ? stressRT.reduce((a, b) => a + b, 0) / stressRT.length
     : THRESHOLDS.maximumReactionTime;
@@ -216,8 +216,8 @@ async function calculateScore(sessionId, studentId) {
 
   // Calculate raw metrics
   const allReactionTimes = events
-    .filter(e => e.reactionTime && e.reactionTime > 0)
-    .map(e => e.reactionTime);
+    .filter(e => (e.reactionTime && e.reactionTime > 0) || (e.decisionTime && e.decisionTime > 0))
+    .map(e => e.reactionTime || e.decisionTime);
   const avgReactionTime = allReactionTimes.length > 0
     ? Math.round(allReactionTimes.reduce((a, b) => a + b, 0) / allReactionTimes.length)
     : 0;
