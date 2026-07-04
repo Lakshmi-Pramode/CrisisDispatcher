@@ -26,7 +26,15 @@ export default function ResultsPage() {
   const loadResults = async () => {
     try {
       const res = await studentService.getResult();
-      setResultData(res.data.data);
+      const scores = res.data.data;
+      // Backend returns an array of scores sorted by completedAt desc — take the latest
+      if (Array.isArray(scores) && scores.length > 0) {
+        setResultData(scores[0]);
+      } else if (scores && !Array.isArray(scores)) {
+        setResultData(scores);
+      } else {
+        setError('No completed assessment found.');
+      }
     } catch (err) {
       if (err.response?.status === 404) {
         setError('No completed assessment found.');
